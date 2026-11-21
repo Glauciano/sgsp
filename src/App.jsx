@@ -119,23 +119,23 @@ export default function SGSP_Completo(){
   const [pombosTotais,setPombosTotais]=useState({provas:'Oficiais',tipoProva:'Velocidade',grupo:'',melhores:'99999',realcar:'0',desempate:'Não',destino:'Impressora',daPag:'1',atePag:'9999',copias:'1'});
   const [pombosFe,setPombosFe]=useState({ano:'2025',num:'16',nome:'Brasilia-DF',tipo:'FUNDO',de:'1',ate:'16',criterio:'Pontos',destino:'Impressora'});
   const [concursoTab,setConcursoTab]=useState('Editar');
-  const [concursosLista]=useState([
-    {ano:'2025',num:'1',nome:'Cravinhos-Sp',data:'08/06/2025',tipo:'Grande Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'2',nome:'Jardinopolis-Sp',data:'15/06/2025',tipo:'Grande Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'3',nome:'Sao Joaquim da Barra-Sp',data:'22/06/2025',tipo:'Grande Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'4',nome:'Igarapava-Sp',data:'29/06/2025',tipo:'Grande Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'5',nome:'Uberaba-Mg',data:'06/07/2025',tipo:'Grande Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'6',nome:'Cravinhos-Sp',data:'08/06/2025',tipo:'Velocidade',oficial:'Oficial'},
-    {ano:'2025',num:'7',nome:'Jardinopolis-Sp',data:'15/06/2025',tipo:'Velocidade',oficial:'Oficial'},
-    {ano:'2025',num:'8',nome:'Sao Joaquim da Barra-Sp',data:'22/06/2025',tipo:'Velocidade',oficial:'Oficial'},
-    {ano:'2025',num:'9',nome:'Igarapava-Sp',data:'29/06/2025',tipo:'Velocidade',oficial:'Oficial'},
-    {ano:'2025',num:'10',nome:'Uberaba-Mg',data:'06/07/2025',tipo:'Velocidade',oficial:'Oficial'},
-    {ano:'2025',num:'11',nome:'Araguari-Go',data:'13/07/2025',tipo:'Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'12',nome:'Catalao-Go',data:'20/07/2025',tipo:'Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'13',nome:'Campo Alegre de Goias-Go',data:'02/08/2025',tipo:'Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'14',nome:'Uberaba-Mg',data:'16/08/2025',tipo:'Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'15',nome:'Cristalina-Go',data:'30/08/2025',tipo:'Fundo',oficial:'Oficial'},
-    {ano:'2025',num:'16',nome:'Brasilia-DF',data:'20/09/2025',tipo:'Fundo',oficial:'Oficial'},
+  const [concursosLista,setConcursosLista]=useState([
+    {ano:'2025',num:'1',nome:'Cravinhos-Sp',data:'08/06/2025',tipo:'Grande Fundo',oficial:'Oficial',latG:'021',latM:'19',latS:'45.0',lonG:'047',lonM:'42',lonS:'58.3',horaSolta:'07:40:00',numConc:'8'},
+    {ano:'2025',num:'2',nome:'Jardinopolis-Sp',data:'15/06/2025',tipo:'Grande Fundo',oficial:'Oficial',latG:'021',latM:'08',latS:'12.0',lonG:'047',lonM:'52',lonS:'10.5',horaSolta:'07:35:00',numConc:'9'},
+    {ano:'2025',num:'3',nome:'Sao Joaquim da Barra-Sp',data:'22/06/2025',tipo:'Grande Fundo',oficial:'Oficial',latG:'020',latM:'34',latS:'50.0',lonG:'047',lonM:'51',lonS:'20.0',horaSolta:'07:30:00',numConc:'10'},
+    {ano:'2025',num:'4',nome:'Igarapava-Sp',data:'29/06/2025',tipo:'Grande Fundo',oficial:'Oficial',latG:'020',latM:'02',latS:'15.0',lonG:'047',lonM:'44',lonS:'40.0',horaSolta:'07:30:00',numConc:'11'},
+    {ano:'2025',num:'5',nome:'Uberaba-Mg',data:'06/07/2025',tipo:'Grande Fundo',oficial:'Oficial',latG:'019',latM:'44',latS:'52.0',lonG:'047',lonM:'55',lonS:'55.0',horaSolta:'07:25:00',numConc:'12'},
+    {ano:'2025',num:'6',nome:'Cravinhos-Sp',data:'08/06/2025',tipo:'Velocidade',oficial:'Oficial',latG:'021',latM:'19',latS:'45.0',lonG:'047',lonM:'42',lonS:'58.3',horaSolta:'07:40:00',numConc:'8'},
+    {ano:'2025',num:'7',nome:'Jardinopolis-Sp',data:'15/06/2025',tipo:'Velocidade',oficial:'Oficial',latG:'021',latM:'08',latS:'12.0',lonG:'047',lonM:'52',lonS:'10.5',horaSolta:'07:35:00',numConc:'9'},
+    {ano:'2025',num:'8',nome:'Sao Joaquim da Barra-Sp',data:'22/06/2025',tipo:'Velocidade',oficial:'Oficial',latG:'020',latM:'34',latS:'50.0',lonG:'047',lonM:'51',lonS:'20.0',horaSolta:'07:30:00',numConc:'10'},
+    {ano:'2025',num:'9',nome:'Igarapava-Sp',data:'29/06/2025',tipo:'Velocidade',oficial:'Oficial',latG:'020',latM:'02',latS:'15.0',lonG:'047',lonM:'44',lonS:'40.0',horaSolta:'07:30:00',numConc:'11'},
+    {ano:'2025',num:'10',nome:'Uberaba-Mg',data:'06/07/2025',tipo:'Velocidade',oficial:'Oficial',latG:'019',latM:'44',latS:'52.0',lonG:'047',lonM:'55',lonS:'55.0',horaSolta:'07:25:00',numConc:'12'},
+    {ano:'2025',num:'11',nome:'Araguari-Go',data:'13/07/2025',tipo:'Fundo',oficial:'Oficial',latG:'018',latM:'38',latS:'20.0',lonG:'048',lonM:'11',lonS:'10.0',horaSolta:'07:20:00',numConc:'15'},
+    {ano:'2025',num:'12',nome:'Catalao-Go',data:'20/07/2025',tipo:'Fundo',oficial:'Oficial',latG:'018',latM:'10',latS:'05.0',lonG:'047',lonM:'56',lonS:'30.0',horaSolta:'07:20:00',numConc:'16'},
+    {ano:'2025',num:'13',nome:'Campo Alegre de Goias-Go',data:'02/08/2025',tipo:'Fundo',oficial:'Oficial',latG:'017',latM:'38',latS:'15.0',lonG:'047',lonM:'46',lonS:'50.0',horaSolta:'07:15:00',numConc:'17'},
+    {ano:'2025',num:'14',nome:'Uberaba-Mg',data:'16/08/2025',tipo:'Fundo',oficial:'Oficial',latG:'019',latM:'44',latS:'52.0',lonG:'047',lonM:'55',lonS:'55.0',horaSolta:'07:25:00',numConc:'18'},
+    {ano:'2025',num:'15',nome:'Cristalina-Go',data:'30/08/2025',tipo:'Fundo',oficial:'Oficial',latG:'016',latM:'46',latS:'10.0',lonG:'047',lonM:'36',lonS:'40.0',horaSolta:'07:10:00',numConc:'20'},
+    {ano:'2025',num:'16',nome:'Brasilia-DF',data:'20/09/2025',tipo:'Fundo',oficial:'Oficial',latG:'015',latM:'42',latS:'01.1',lonG:'047',lonM:'48',lonS:'39.0',horaSolta:'06:35:00',numConc:'22'},
   ]);
   const [concursoEdit,setConcursoEdit]=useState({ano:'2025',num:'1',nome:'Cravinhos-Sp',data:'08/06/2025',numConc:'8',premios:'Sim',tipo:'Grande Fundo',oficial:'Sim',pontosPombos:'Sim',pontosConc:'Sim',noite1:'00:00:00',noite2:'00:00:00',noite3:'00:00:00',horaSolta:'07:40:00',obs:'',latG:'021',latM:'19',latS:'45.0',lonG:'047',lonM:'42',lonS:'58.3'});
   const [listConcParams,setListConcParams]=useState({deAno:'2025',deNum:'1',ateAno:'2025',ateNum:'16',daData:'',ateData:'31/12/2026',concursoTipo:'Todos',provasOficiais:'Todas',tipo:'Simples',ordenacao:'Numérica',destino:'Impressora'});
@@ -174,7 +174,7 @@ export default function SGSP_Completo(){
     {assoc:'11',assocNome:'Clube Columbófilo Limeirense',colec:'33',nome:'Federação Paulista de Columbófila',numFed:'1'},
   ]);
   const [concTab,setConcTab]=useState('Editar');
-  const [concorrentesLista]=useState([
+  const [concorrentesLista,setConcorrentesLista]=useState([
     {assoc:'11',col:'33',num:'77',nome:'RENATO SOARES',lat:'022-34-44.7',lon:'047-23-20.4',nlf:'1'},
     {assoc:'11',col:'33',num:'81',nome:'VILMAR ALMEIDA PORTA DO SOL',lat:'022-36-37.7',lon:'047-25-16.9',nlf:'1'},
     {assoc:'11',col:'33',num:'85',nome:'VALTER CARNEVALLI',lat:'022-34-49.9',lon:'047-41-55.7',nlf:'1'},
@@ -205,7 +205,7 @@ export default function SGSP_Completo(){
   const [listConcWin,setListConcWin]=useState({deAssoc:'11',deColec:'33',ateAssoc:'11',ateColec:'33',conc1:'Todos',conc2:'Todos',tipo:'Simples II',ordenacao:'Numérica',destino:'Impressora'});
   const [pomboTab,setPomboTab]=useState('Editar');
   const [pomboEdit,setPomboEdit]=useState({anilha:'',assoc:'0',colec:'',num:'0',nome:'',morada:'',localidade:'',cod1:'0',cod2:'',telefone:'',sexo:'Macho',pomboFe:'Não',equipaFixa:'Não',dataIntro:'//'});
-  const [pombosLista]=useState([
+  const [pombosLista,setPombosLista]=useState([
     {anilha:'0000023/22',assoc:'11',colec:'33',num:'1508',sexo:'M'},
     {anilha:'0000024/22',assoc:'11',colec:'33',num:'1508',sexo:'M'},
     {anilha:'0000025/22',assoc:'11',colec:'33',num:'1508',sexo:'M'},
@@ -245,6 +245,97 @@ export default function SGSP_Completo(){
     {anilha:'1134642/21',assoc:'11',colec:'33',num:'283',sexo:'M'},
   ]);
   const [listPombosWin,setListPombosWin]=useState({dePombo:'0000023/22',atePombo:'9641564/24',deAssoc:'11',deColec:'33',deNum:'77',deNome:'RENATO SOARES',ateAssoc:'11',ateColec:'33',ateNum:'1517',ateNome:'VENERANDO SOARES DA SILVA',deData:'',ateData:'31/12/2025',tipo:'Por pombo'});
+
+  // ===== VINCENTY FRONTEND (mesmo motor do server.js - 0.5mm) =====
+  const vincenty = (lat1,lon1,lat2,lon2) => {
+    if(lat1===lat2 && lon1===lon2) return 0;
+    const a=6378137, f=1/298.257223563, b=(1-f)*a;
+    const toRad=d=>d*Math.PI/180;
+    const phi1=toRad(lat1), phi2=toRad(lat2), L=toRad(lon2-lon1);
+    const U1=Math.atan((1-f)*Math.tan(phi1)), U2=Math.atan((1-f)*Math.tan(phi2));
+    const sinU1=Math.sin(U1), cosU1=Math.cos(U1), sinU2=Math.sin(U2), cosU2=Math.cos(U2);
+    let lambda=L, lambdaP, iter=100, sinSigma, cosSigma, sigma, sinAlpha, cosSqAlpha, cos2SigmaM;
+    do{
+      const sinLambda=Math.sin(lambda), cosLambda=Math.cos(lambda);
+      sinSigma=Math.sqrt((cosU2*sinLambda)**2 + (cosU1*sinU2 - sinU1*cosU2*cosLambda)**2);
+      if(sinSigma===0) return 0;
+      cosSigma=sinU1*sinU2 + cosU1*cosU2*cosLambda;
+      sigma=Math.atan2(sinSigma, cosSigma);
+      sinAlpha=(cosU1*cosU2*sinLambda)/sinSigma;
+      cosSqAlpha=1 - sinAlpha*sinAlpha;
+      cos2SigmaM=cosSqAlpha!==0 ? cosSigma - 2*sinU1*sinU2/cosSqAlpha : 0;
+      const C=f/16*cosSqAlpha*(4+f*(4-3*cosSqAlpha));
+      lambdaP=lambda;
+      lambda=L + (1-C)*f*sinAlpha*(sigma + C*sinSigma*(cos2SigmaM + C*cosSigma*(-1+2*cos2SigmaM**2)));
+    } while(Math.abs(lambda-lambdaP)>1e-12 && --iter>0);
+    if(iter===0) return NaN;
+    const uSq=cosSqAlpha*(a*a-b*b)/(b*b);
+    const A=1+uSq/16384*(4096+uSq*(-768+uSq*(320-175*uSq)));
+    const B=uSq/1024*(256+uSq*(-128+uSq*(74-47*uSq)));
+    const deltaSigma=B*sinSigma*(cos2SigmaM + B/4*(cosSigma*(-1+2*cos2SigmaM**2) - B/6*cos2SigmaM*(-3+4*sinSigma**2)*(-3+4*cos2SigmaM**2)));
+    return Number((b*A*(sigma-deltaSigma)).toFixed(1));
+  };
+  const parseCoord = (g,m,s) => {
+    const gg=parseFloat(g)||0, mm=parseFloat(m)||0, ss=parseFloat(s)||0;
+    return gg + mm/60 + ss/3600;
+  };
+  // Calcula distância concurso -> concorrente
+  const calcDistancia = (conc, concorrente) => {
+    // conc pode ter latG/latM/latS ou lat string
+    let clat, clon;
+    if(conc.latG) clat=parseCoord(conc.latG,conc.latM,conc.latS);
+    else if(conc.lat) { const p=conc.lat.split('-'); clat=parseCoord(p[0],p[1],p[2]); }
+    else clat=parseCoord('015','42','01.1');
+    if(conc.lonG) clon=parseCoord(conc.lonG,conc.lonM,conc.lonS);
+    else if(conc.lon) { const p=conc.lon.split('-'); clon=parseCoord(p[0],p[1],p[2]); }
+    else clon=parseCoord('047','48','39.0');
+    // concorrente
+    let rlat, rlon;
+    if(concorrente.lat) { const p=concorrente.lat.split('-'); rlat=parseCoord(p[0],p[1],p[2]); }
+    else rlat=parseCoord('022','34','44.7');
+    if(concorrente.lon) { const p=concorrente.lon.split('-'); rlon=parseCoord(p[0],p[1],p[2]); }
+    else rlon=parseCoord('047','23','20.4');
+    return vincenty(clat, clon, rlat, rlon);
+  };
+
+  // ===== FUNÇÕES INTERLIGADAS =====
+  const salvarConcurso = () => {
+    const novo={ano:concursoEdit.ano,num:concursoEdit.num,nome:concursoEdit.nome,data:concursoEdit.data,tipo:concursoEdit.tipo,oficial:concursoEdit.oficial,latG:concursoEdit.latG,latM:concursoEdit.latM,latS:concursoEdit.latS,lonG:concursoEdit.lonG,lonM:concursoEdit.lonM,lonS:concursoEdit.lonS,horaSolta:concursoEdit.horaSolta,numConc:concursoEdit.numConc};
+    setConcursosLista(prev=>{
+      const idx=prev.findIndex(c=>c.ano===novo.ano && c.num===novo.num);
+      if(idx>=0){ const n=[...prev]; n[idx]=novo; return n; }
+      return [...prev, novo];
+    });
+    // Atualiza concurso global ativo
+    setConcurso({ano:novo.ano,num:novo.num,nome:novo.nome,data:novo.data,tipo:novo.tipo,lat:novo.latG+'-'+novo.latM+'-'+novo.latS,lon:novo.lonG+'-'+novo.lonM+'-'+novo.lonS,horaSolta:novo.horaSolta,enviados:parseInt(novo.numConc)*12||300,tempoMorto:'10:52:00'});
+    setMsg('Concurso '+novo.ano+'/'+novo.num+' '+novo.nome+' guardado e interligado — '+concursosLista.length+' concursos ativos');
+  };
+  const salvarConcorrente = () => {
+    const novo={assoc:concEdit.assoc,col:concEdit.col,num:concEdit.num,nome:concEdit.nome,lat:concEdit.latG+'-'+concEdit.latM+'-'+concEdit.latS,lon:concEdit.lonG+'-'+concEdit.lonM+'-'+concEdit.lonS,nlf:'1'};
+    setConcorrentesLista(prev=>{
+      const idx=prev.findIndex(c=>c.num===novo.num && c.col===novo.col);
+      if(idx>=0){ const n=[...prev]; n[idx]={...n[idx], ...novo}; return n; }
+      return [...prev, novo];
+    });
+    setMsg('Concorrente '+novo.assoc+'/'+novo.col+'/'+novo.num+' '+novo.nome+' guardado — '+concorrentesLista.length+' concorrentes');
+  };
+  const salvarPombo = () => {
+    const novo={anilha:pomboEdit.anilha,assoc:pomboEdit.assoc,colec:pomboEdit.colec,num:pomboEdit.num,sexo:pomboEdit.sexo==='Macho'?'M':pomboEdit.sexo==='Fêmea'?'F':'?'};
+    setPombosLista(prev=>{
+      const idx=prev.findIndex(p=>p.anilha===novo.anilha);
+      if(idx>=0){ const n=[...prev]; n[idx]=novo; return n; }
+      return [...prev, novo];
+    });
+    setMsg('Pombo '+novo.anilha+' guardado — '+pombosLista.length+' pombos — Concorrente '+novo.num);
+  };
+  const selecionarConcursoGlobal = (c) => {
+    const full={ano:c.ano,num:c.num,nome:c.nome,data:c.data,tipo:c.tipo,lat:c.latG+'-'+c.latM+'-'+c.latS,lon:c.lonG+'-'+c.lonM+'-'+c.lonS,horaSolta:c.horaSolta,enviados:parseInt(c.numConc)*18||300,tempoMorto:'10:52:00'};
+    setConcurso(full);
+    setConcursoEdit({ano:c.ano,num:c.num,nome:c.nome,data:c.data,numConc:c.numConc,premios:'Sim',tipo:c.tipo,oficial:'Sim',pontosPombos:'Sim',pontosConc:'Sim',noite1:'00:00:00',noite2:'00:00:00',noite3:'00:00:00',horaSolta:c.horaSolta,obs:'Importado do cadastro '+c.ano+'/'+c.num,latG:c.latG,latM:c.latM,latS:c.latS,lonG:c.lonG,lonM:c.lonM,lonS:c.lonS});
+    setPombosEnv({...pombosEnv,ano:c.ano,num:c.num});
+    setMsg('Concurso '+c.ano+'/'+c.num+' '+c.nome+' ATIVO — Lat '+c.latG+'° Lon '+c.lonG+'° — Hora '+c.horaSolta+' — Matriz recalculada para '+concorrentesLista.length+' concorrentes');
+  };
+
 
   // Calculo automático quando muda anilha/hora
   const calcularVoo=()=>{
@@ -662,8 +753,8 @@ export default function SGSP_Completo(){
                     else if(lupaTarget==='distDe'){ setDistParams({...distParams,deAno:c.ano,deNum:c.num}); }
                     else if(lupaTarget==='distAte'){ setDistParams({...distParams,ateAno:c.ano,ateNum:c.num}); }
                     else if(lupaTarget==='pombosEnvConcurso'){ setPombosEnv({...pombosEnv,ano:c.ano,num:c.num}); }
-                    else { setConcurso({...concurso,ano:c.ano,num:c.num,nome:c.nome}); setConcursoEdit({...concursoEdit,ano:c.ano,num:c.num,nome:c.nome,data:c.data}); }
-                    setLupaConcurso(false); setMsg('Concurso selecionado: '+c.nome);
+                    else { selecionarConcursoGlobal(c); }
+                    setLupaConcurso(false);
                   }} style={{padding:'6px',borderBottom:'1px solid #808080',cursor:'pointer',backgroundColor:'#fff'}}>{c.ano}/{c.num} — {c.nome} — {c.data} — {c.tipo}</div>)}
                   <div style={{height:'1px',backgroundColor:'#808080',margin:'4px 0'}}></div>
                   {locais.map(l=><div key={l.id} onClick={()=>{setConcurso({...concurso,ano:'2025',num:'16',nome:l.nome}); setLupaConcurso(false); setMsg(`Concurso selecionado: ${l.nome}`);}} style={{padding:'6px',borderBottom:'1px solid #808080',cursor:'pointer',backgroundColor:'#fff',fontSize:'10px',color:'#000080'}}>{l.nome} — Locais de Solta {l.lat.toFixed(4)},{l.lon.toFixed(4)}</div>)}
@@ -1437,7 +1528,7 @@ Data;Concurso;Tipo;Clas;Coef
                   </div>
                   <div style={{display:'flex',justifyContent:'center',gap:'6px'}}>
                     <button style={s.btn} onClick={()=>setMsg('Novo concurso criado')}>Novo</button>
-                    <button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>{ const novo={ano:concursoEdit.ano,num:concursoEdit.num,nome:concursoEdit.nome,data:concursoEdit.data,tipo:concursoEdit.tipo,oficial:'Oficial'}; setMsg('Concurso '+novo.ano+'/'+novo.num+' guardado'); }}>Guardar</button>
+                    <button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={salvarConcurso}>Guardar</button>
                     <button style={s.btn}>Desfazer</button>
                     <button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button>
                     <button style={s.btn} onClick={()=>open('listagemConcursosPreview')}>Imprimir</button>
@@ -1597,11 +1688,11 @@ Data;Concurso;Tipo;Clas;Coef
               <table style={{width:'100%',borderCollapse:'collapse',fontSize:'9px'}}>
                 <thead><tr style={{backgroundColor:'#c0c0c0'}}><th style={{border:'1px solid #000',padding:'2px'}}>Concorrente</th><th style={{border:'1px solid #000',padding:'2px'}}>Concurso<br/>Latitude Longitude</th><th style={{border:'1px solid #000',padding:'2px'}}>Concorrente<br/>Latitude Longitude</th><th style={{border:'1px solid #000',padding:'2px'}}>Distancia<br/>(metros)</th></tr></thead>
                 <tbody>
-                  <tr><td style={{border:'1px solid #c0c0c0',padding:'1px 4px'}}>33/ 77 - RENATO SOARES</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>021-19-45.0 047-42-58.3</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>022-34-44.0 047-23-20.0</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'right'}}>142469.5</td></tr>
-                  <tr><td style={{border:'1px solid #c0c0c0',padding:'1px 4px'}}>33/ 81 - VILMAR ALMEIDA PORTA DO SOL</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>021-19-45.0 047-42-58.3</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>022-36-47.0 047-25-16.0</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'right'}}>145109.8</td></tr>
-                  <tr><td style={{border:'1px solid #c0c0c0',padding:'1px 4px'}}>33/ 85 - VALTER CARNEVALLI</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>021-19-45.0 047-42-58.3</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>022-34-49.0 047-41-55.0</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'right'}}>138574.5</td></tr>
-                  <tr><td style={{border:'1px solid #c0c0c0',padding:'1px 4px'}}>33/ 91 - EDSON ROBERTO DA SILVA</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>021-19-45.0 047-42-58.3</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>022-34-51.0 047-22-35.0</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'right'}}>142969.8</td></tr>
-                  <tr><td style={{border:'1px solid #c0c0c0',padding:'1px 4px'}}>33/283 - GLAUCION CLAITO SILVA</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>021-19-45.0 047-42-58.3</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>022-33-46.0 047-22-55.0</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'right'}}>140904.6</td></tr>
+                  {concorrentesLista.slice(0,8).map(cc=>{
+                    const dist=calcDistancia(concursosLista.find(c=>c.num===distParams.deNum) || concurso, cc);
+                    const concLatLon = (concursosLista.find(c=>c.num===distParams.deNum)?.latG||'021')+'-'+(concursosLista.find(c=>c.num===distParams.deNum)?.latM||'19')+'-'+(concursosLista.find(c=>c.num===distParams.deNum)?.latS||'45.0')+' '+(concursosLista.find(c=>c.num===distParams.deNum)?.lonG||'047')+'-'+(concursosLista.find(c=>c.num===distParams.deNum)?.lonM||'42')+'-'+(concursosLista.find(c=>c.num===distParams.deNum)?.lonS||'58.3');
+                    return (<tr key={cc.num}><td style={{border:'1px solid #c0c0c0',padding:'1px 4px'}}>{cc.col}/ {cc.num} - {cc.nome}</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>{concLatLon}</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'center'}}>{cc.lat} {cc.lon}</td><td style={{border:'1px solid #c0c0c0',padding:'1px 4px',textAlign:'right',fontWeight:'bold',backgroundColor:'#e8f0ff'}}>{dist.toFixed(1)}</td></tr>);
+                  })}
                 </tbody>
               </table>
             </div>
@@ -2141,7 +2232,7 @@ Data;Concurso;Tipo;Clas;Coef
                     </div>
                   </div>
                   <div style={{display:'flex',justifyContent:'center',gap:'6px'}}>
-                    <button style={s.btn}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>{setMsg('Concorrente '+concEdit.assoc+'/'+concEdit.col+'/'+concEdit.num+' guardado');}}>Guardar</button><button style={s.btn}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button><button style={s.btn} onClick={()=>close('tabelaConcorrentes')}>Sair</button>
+                    <button style={s.btn}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={salvarConcorrente}>Guardar</button><button style={s.btn}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button><button style={s.btn} onClick={()=>close('tabelaConcorrentes')}>Sair</button>
                   </div>
                 </div>
               )}
@@ -2306,7 +2397,7 @@ Data;Concurso;Tipo;Clas;Coef
                   </div>
                   <div style={{display:'flex',justifyContent:'center',gap:'4px',borderTop:'2px groove #fff',paddingTop:'6px'}}>
                     <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',padding:'3px 6px'}} onClick={()=>setPomboEdit({anilha:'',assoc:'0',colec:'',num:'0',nome:'',morada:'',localidade:'',cod1:'0',cod2:'',telefone:'',sexo:'Macho',pomboFe:'Não',equipaFixa:'Não',dataIntro:'//'})}><span>📄</span>Novo</button>
-                    <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',backgroundColor:'#c0ffc0',padding:'3px 6px'}} onClick={()=>setMsg('Pombo '+pomboEdit.anilha+' guardado')}><span>💾</span>Guardar</button>
+                    <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',backgroundColor:'#c0ffc0',padding:'3px 6px'}} onClick={salvarPombo}><span>💾</span>Guardar</button>
                     <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',padding:'3px 6px'}}><span>↩️</span>Desfazer</button>
                     <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',backgroundColor:'#ffc0c0',padding:'3px 6px'}}><span>❌</span>Anular</button>
                     <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',padding:'3px 6px'}} onClick={()=>close('manutencaoPombosWin')}><span>🚪</span>Sair</button>

@@ -8,14 +8,16 @@
     "dev:server": "node server.js",
     "dev:frontend": "vite --host 0.0.0.0 --port 8002",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:frontend\"",
-    "build": "vite build",
-    "vercel-build": "vite build"
+    "build": "npx vite build",
+    "vercel-build": "npx vite build"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.1",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "vite": "^6.2.0",
+    "@vitejs/plugin-react": "^4.3.3"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.3",
@@ -25,6 +27,6 @@
     "react-dom": "^18.3.1"
   },
   "engines": {
-    "node": "22.x"
+    "node": "20.x"
   }
 }
