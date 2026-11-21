@@ -317,5 +317,11 @@ app.get('*', (req,res) => {
   });
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, '0.0.0.0', () => console.log(`🚀 S.G.S.P Backend Oficial rodando na porta ${PORT} - Espelho Integral S.G.S.P`));
+// Export for Vercel serverless
+module.exports = app;
+
+// Only listen when run directly (not on Vercel)
+if (require.main === module) {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, '0.0.0.0', () => console.log(`🚀 S.G.S.P Backend Oficial rodando na porta ${PORT} - Espelho Integral S.G.S.P`));
+}
