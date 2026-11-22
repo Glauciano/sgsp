@@ -91,10 +91,10 @@ export default function SGSP_Completo(){
   };
   // Lançamento form state (igual print)
   const [form,setForm]=useState({
-    concurso:'2025/16',anilha:'',sexo:'Macho',assoc:'0',colec:'',concorrente:'0',
+    concurso:'',anilha:'',sexo:'Macho',assoc:'0',colec:'',concorrente:'',
     dataI:'',horaI:'',dataF:'',horaF:'',correcao:0,
     diasCheg:1,diaCheg:'',partida:'',tempoMorto:'',corr2:0,tempoVoo:'',
-    distancia:'0.0',media:'0.000',
+    distancia:'',media:'',
     anilhas:true,designados:true,equipas:false,csec:false,feder:false,
   });
   const [anilhasLancadas,setAnilhasLancadas]=useState([
@@ -337,19 +337,52 @@ export default function SGSP_Completo(){
   };
 
 
-  // Calculo automático quando muda anilha/hora
+  // Calculo automático quando muda anilha/hora/concurso
   const calcularVoo=()=>{
-    const ps=locais.find(l=>l.nome===concurso.nome) || locais[0];
-    const soc=socios.find(s=>String(s.id)===String(form.concorrente)) || socios[0];
-    if(!soc) return;
-    const dist=vincenty(ps.lat,ps.lon,soc.lat,soc.lon);
-    // tempo simples: diferença entre Hora final e 06:35 solta
-    let tempoMin= 380; // mock 6h20
-    const media = dist / tempoMin;
-    setForm(f=>({...f,distancia:dist.toFixed(1),media:media.toFixed(3)}));
-    setMsg(`Distância calculada WGS84: ${dist.toFixed(1)} m | Média ${media.toFixed(3)} m/min`);
+    // Usa coordenadas reais do concurso (latG/M/S) importadas da lupa — não depende mais de locais[]
+    let cLat, cLon;
+    if(concurso.latG) cLat=parseCoord(concurso.latG,concurso.latM,concurso.latS);
+    else if(concurso.lat) { const p=concurso.lat.split('-'); cLat=parseCoord(p[0],p[1],p[2]); }
+    else return;
+    if(concurso.lonG) cLon=parseCoord(concurso.lonG,concurso.lonM,concurso.lonS);
+    else if(concurso.lon) { const p=concurso.lon.split('-'); cLon=parseCoord(p[0],p[1],p[2]); }
+    else return;
+    // Concorrente selecionado no lançamento
+    const concSel = concorrentesLista.find(cc=>cc.num===form.concorrente || cc.num===String(form.concorrente).split('/').pop());
+    const soc = form.concorrente ? (concorrentesLista.find(cc=>cc.num===String(form.concorrente).split('/').pop()) || socios.find(s=>String(s.id)===String(form.concorrente))) : null;
+    // Tenta concorrentesLista primeiro (tem lat/lon real), fallback para socios
+    let sLat, sLon;
+    if(concSel && concSel.lat) { const p=concSel.lat.split('-'); sLat=parseCoord(p[0],p[1],p[2]); const q=concSel.lon.split('-'); sLon=parseCoord(q[0],q[1],q[2]); }
+    else if(soc && soc.lat) { sLat=soc.lat; sLon=soc.lon; }
+    else return;
+    const dist=vincenty(cLat,cLon,sLat,sLon);
+    // Só calcula média se houver hora de chegada preenchida — senão deixa vazio
+    const hasHora = form.horaCheg && form.horaCheg.includes(':') && !form.horaCheg.includes('HH');
+    let mediaTxt='—';
+    let tempoMin=0;
+    if(hasHora){
+      // Calcula tempo real: chegada - solta (horaSolta do concurso)
+      const [hs,ms,ss]= (concurso.horaSolta||'06:35:00').split(':').map(Number);
+      const [hc,mc,sc]= form.horaCheg.split(':').map(Number);
+      const soltaMin=hs*60+ms+ss/60;
+      let chegadaMin=hc*60+mc+sc/60;
+      // Se chegada for no dia seguinte (ex: solta 06:35, chegada 17:20 -> mesmo dia)
+      if(chegadaMin < soltaMin) chegadaMin+=1440;
+      tempoMin=chegadaMin - soltaMin + (parseInt(form.diasPlus)||0)*1440;
+      if(tempoMin>0) mediaTxt=(dist/tempoMin).toFixed(3);
+    }
+    setForm(f=>({...f,distancia:dist.toFixed(1),media:mediaTxt}));
+    if(hasHora) setMsg(`Distância WGS84: ${dist.toFixed(1)} m | Média ${mediaTxt} m/min (Uberaba real 322km, não 751km)`);
+    else setMsg(`Distância WGS84: ${dist.toFixed(1)} m — preencha Hora de Chegada para calcular média`);
   };
-  useEffect(()=>{ if(form.anilha || form.concorrente) calcularVoo(); },[form.concorrente,form.anilha]);
+  useEffect(()=>{ if(form.anilha || form.concorrente || concurso.num) calcularVoo(); },[form.concorrente,form.anilha,concurso.num]);
+  // Limpa lançamento ao trocar de concurso (campos limpos como pedido)
+  useEffect(()=>{
+    if(concurso.num && wins.includes('lancamento')){
+      // Quando concurso muda via lupa, limpa anilha/distancia/media mas mantém concurso ativo
+      setForm(f=>({...f, anilha:'', concorrente:'', distancia:'', media:''}));
+    }
+  },[concurso.num]);
 
   const rodarCalculo=()=>{
     const seq=['apagar','dist','preencher','tempo','lugares','premios','coef'];
@@ -653,7 +686,21 @@ export default function SGSP_Completo(){
 
               <div style={{display:'flex',gap:'6px',alignItems:'center',marginBottom:'6px'}}>
                 <label style={s.label}>Anilha :</label>
-                <input value={form.anilha} onKeyDown={handleEnter} onChange={e=>setForm({...form,anilha:maskAnilha(e.target.value)})} placeholder="1234567/25" style={{...s.field,width:'110px'}} maxLength={10} />
+                <input value={form.anilha} onKeyDown={handleEnter} onChange={e=>{
+                  const v=maskAnilha(e.target.value);
+                  // Busca socio fixo via pombosLista (anilha -> concorrente)
+                  let autoConc='';
+                  let autoAssoc='0';
+                  const found = pombosLista.find(p=>p.anilha===v || p.anilha.replace('/','')===v.replace('/',''));
+                  if(found){ autoConc=found.num; autoAssoc=found.assoc; }
+                  else if(v.length>=7){
+                    // tenta por prefixo
+                    const f2=pombosLista.find(p=>p.anilha.startsWith(v.slice(0,5)));
+                    if(f2){ autoConc=f2.num; autoAssoc=f2.assoc; }
+                  }
+                  if(autoConc) setForm({...form,anilha:v, concorrente:autoConc, assoc:autoAssoc});
+                  else setForm({...form,anilha:v});
+                }} placeholder="1234567/25" style={{...s.field,width:'110px'}} maxLength={10} />
                 <button type="button" style={s.tbtn} onClick={()=>setLupaAnilha(true)} title="Pesquisar anilha">🔍</button>
                 <div style={s.group}>
                   <span style={{fontWeight:'bold',fontSize:'10px'}}>Dados do Pombo</span>
