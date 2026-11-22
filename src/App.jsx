@@ -47,7 +47,7 @@ export default function SGSP_Completo(){
   const [msg,setMsg]=useState('Pronto. Movimentos → Lançamento da Prova | Concurso → Pombos Enviados | F9 Cálculo');
 
   // Base Limeirense
-  const [concurso,setConcurso]=useState({ano:2025,num:16,nome:'Brasilia-DF',tipo:'FUNDO',data:'20/09/2025',horaSolta:'06:35:00',lat:'015-42-01.1',lon:'047-48-39.0',enviados:300,tempoMorto:'10:52:00'});
+  const [concurso,setConcurso]=useState({ano:'',num:'',nome:'',tipo:'',data:'',horaSolta:'',lat:'',lon:'',enviados:0,tempoMorto:''});
   const [locais]=useState([
     {id:1,nome:'Brasilia-DF',lat:-15.793889,lon:-47.882778},
     {id:2,nome:'Goiania-GO',lat:-16.6869,lon:-49.2648},
@@ -97,9 +97,7 @@ export default function SGSP_Completo(){
     distancia:'',media:'',
     anilhas:true,designados:true,equipas:false,csec:false,feder:false,
   });
-  const [anilhasLancadas,setAnilhasLancadas]=useState([
-    {anilha:'0084751/20',hora:'17:20:10'},{anilha:'2320071/23',hora:'17:20:12'},{anilha:'2320071/23',hora:'17:22:06'}
-  ]);
+  const [anilhasLancadas,setAnilhasLancadas]=useState([]);
   // Calculo steps
   const [steps,setSteps]=useState({apagar:false,dist:false,preencher:false,tempo:false,lugares:false,premios:false,coef:false,sec:false});
   const [calcDone,setCalcDone]=useState(false);
@@ -137,11 +135,11 @@ export default function SGSP_Completo(){
     {ano:'2025',num:'15',nome:'Cristalina-Go',data:'30/08/2025',tipo:'Fundo',oficial:'Oficial',latG:'016',latM:'46',latS:'10.0',lonG:'047',lonM:'36',lonS:'40.0',horaSolta:'07:10:00',numConc:'20'},
     {ano:'2025',num:'16',nome:'Brasilia-DF',data:'20/09/2025',tipo:'Fundo',oficial:'Oficial',latG:'015',latM:'42',latS:'01.1',lonG:'047',lonM:'48',lonS:'39.0',horaSolta:'06:35:00',numConc:'22'},
   ]);
-  const [concursoEdit,setConcursoEdit]=useState({ano:'2025',num:'1',nome:'Cravinhos-Sp',data:'08/06/2025',numConc:'8',premios:'Sim',tipo:'Grande Fundo',oficial:'Sim',pontosPombos:'Sim',pontosConc:'Sim',noite1:'00:00:00',noite2:'00:00:00',noite3:'00:00:00',horaSolta:'07:40:00',obs:'',latG:'021',latM:'19',latS:'45.0',lonG:'047',lonM:'42',lonS:'58.3'});
-  const [listConcParams,setListConcParams]=useState({deAno:'2025',deNum:'1',ateAno:'2025',ateNum:'16',daData:'',ateData:'31/12/2026',concursoTipo:'Todos',provasOficiais:'Todas',tipo:'Simples',ordenacao:'Numérica',destino:'Impressora'});
-  const [distParams,setDistParams]=useState({deAno:'2025',deNum:'1',ateAno:'2025',ateNum:'16',deConc1:'11',deConc2:'33',deConc3:'77',deNome:'RENATO SOARES',ateConc1:'11',ateConc2:'33',ateConc3:'1517',ateNome:'VENERANDO SOARES DA SILVA',tipo:'Por concurso',listagem:'Corrida'});
-  const [pombosEnv,setPombosEnv]=useState({ano:'2025',num:'1',assoc:'11',colec:'33',assocNome:'Federacao Paulista de Columbiofilia',encestados:'',doublagem:'',total:'0'});
-  const [dadosProprios,setDadosProprios]=useState({nome:'CLUBE COLUMBOFILO LIMEIRENSE',morada:'LIMEIRA-SP',localidade:'',cod1:'19',cod2:'',telefone:'',fax:'',email:'',imprimeLogo:'Não'});
+  const [concursoEdit,setConcursoEdit]=useState({ano:'',num:'',nome:'',data:'',numConc:'',premios:'Não',tipo:'Velocidade',oficial:'Sim',pontosPombos:'Sim',pontosConc:'Sim',noite1:'00:00:00',noite2:'00:00:00',noite3:'00:00:00',horaSolta:'',obs:'',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''});
+  const [listConcParams,setListConcParams]=useState({deAno:'',deNum:'',ateAno:'',ateNum:'',daData:'',ateData:'',concursoTipo:'Todos',provasOficiais:'Todas',tipo:'Simples',ordenacao:'Numérica',destino:'Impressora'});
+  const [distParams,setDistParams]=useState({deAno:'',deNum:'',ateAno:'',ateNum:'',deConc1:'',deConc2:'',deConc3:'',deNome:'',ateConc1:'',ateConc2:'',ateConc3:'',ateNome:'',tipo:'Por concurso',listagem:'Corrida'});
+  const [pombosEnv,setPombosEnv]=useState({ano:'',num:'',assoc:'',colec:'',assocNome:'',encestados:'',doublagem:'',total:'0'});
+  const [dadosProprios,setDadosProprios]=useState({nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',fax:'',email:'',imprimeLogo:'Não'});
   const [config,setConfig]=useState({numEquipas:2,equipasVirt:'Não',pedeSexo:'Sim',tipoCoord:'Cartográfica',pombosSep:'Não',entidade:'Associação',zonas:'Sim',quartoAtivo:'Não',quantosPontuam:0,ordemMov:'Hora',nomeCamp:'',calcInter:'Por melhores Pombos Geral',numOcor:0,campColTodos:true,quantosCol:9999,premiosTodos:true,percEnv:100,premiosAte:99999,comZero:'Não',borraTipo:'Geral',borraQuantos:2});
   const [config2,setConfig2]=useState({pontuaColumbo:3,moeda:'€',numPombosCol:30,todosPombos:'Sim',sinalPor:'Por Prova'});
   const [locaisTab,setLocaisTab]=useState('Editar');
@@ -164,12 +162,12 @@ export default function SGSP_Completo(){
   const [apagarConc,setApagarConc]=useState({ano:'0',num:'0',conc1:'0',conc2:'',conc3:'0'});
   const [pontosPerc,setPontosPerc]=useState({tipo:'Velocidade',pontos1:100,percPombos:100});
   const [assocTab,setAssocTab]=useState('Editar');
-  const [assocEdit,setAssocEdit]=useState({codigo:'0',nome:'',morada:'',localidade:'',cod1:'0',cod2:'',cod3:'',telefone:'',fax:'',email:''});
+  const [assocEdit,setAssocEdit]=useState({codigo:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',cod3:'',telefone:'',fax:'',email:''});
   const [assocLista]=useState([
     {codigo:'11',nome:'Clube Columbófilo Limeirense',morada:'Elizabete Matie Ogawa Bobice nº100',localidade:'Limeira S.P',cod1:'1348',cod2:'614',cod3:'8',telefone:'1998748092',email:'glaucianosilva@gmail.com'},
   ]);
   const [colecTab,setColecTab]=useState('Editar');
-  const [colecEdit,setColecEdit]=useState({assoc:'0',assocNome:'',colec:'',nome:'',morada:'',localidade:'',cod1:'0',cod2:'',cod3:'',telefone:'',fax:'',email:'',numFed:'0'});
+  const [colecEdit,setColecEdit]=useState({assoc:'',assocNome:'',colec:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',cod3:'',telefone:'',fax:'',email:'',numFed:''});
   const [colecLista]=useState([
     {assoc:'11',assocNome:'Clube Columbófilo Limeirense',colec:'33',nome:'Federação Paulista de Columbófila',numFed:'1'},
   ]);
@@ -201,10 +199,10 @@ export default function SGSP_Completo(){
     {assoc:'11',col:'33',num:'1516',nome:'PAULO SALES',lat:'022-28-43.9',lon:'047-28-14.2',nlf:'1'},
     {assoc:'11',col:'33',num:'1517',nome:'VENERANDO SOARES DA SILVA',lat:'022-46-03.2',lon:'047-34-55.9',nlf:'1'},
   ]);
-  const [concEdit,setConcEdit]=useState({assoc:'0',col:'',num:'0',nome:'',morada:'',localidade:'',cod1:'0',cod2:'',telefone:'',fax:'',email:'',licFed:'0',doublagem:'Não',grupoFundo:'Não',pagaList:'Não',tipo:'Concorrente',sorteio:'Não',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''});
-  const [listConcWin,setListConcWin]=useState({deAssoc:'11',deColec:'33',ateAssoc:'11',ateColec:'33',conc1:'Todos',conc2:'Todos',tipo:'Simples II',ordenacao:'Numérica',destino:'Impressora'});
+  const [concEdit,setConcEdit]=useState({assoc:'',col:'',num:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',fax:'',email:'',licFed:'',doublagem:'Não',grupoFundo:'Não',pagaList:'Não',tipo:'Concorrente',sorteio:'Não',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''});
+  const [listConcWin,setListConcWin]=useState({deAssoc:'',deColec:'',ateAssoc:'',ateColec:'',conc1:'Todos',conc2:'Todos',tipo:'Simples II',ordenacao:'Numérica',destino:'Impressora'});
   const [pomboTab,setPomboTab]=useState('Editar');
-  const [pomboEdit,setPomboEdit]=useState({anilha:'',assoc:'0',colec:'',num:'0',nome:'',morada:'',localidade:'',cod1:'0',cod2:'',telefone:'',sexo:'Macho',pomboFe:'Não',equipaFixa:'Não',dataIntro:'//'});
+  const [pomboEdit,setPomboEdit]=useState({anilha:'',assoc:'',colec:'',num:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',sexo:'Macho',pomboFe:'Não',equipaFixa:'Não',dataIntro:''});
   const [pombosLista,setPombosLista]=useState([
     {anilha:'0000023/22',assoc:'11',colec:'33',num:'1508',sexo:'M'},
     {anilha:'0000024/22',assoc:'11',colec:'33',num:'1508',sexo:'M'},
@@ -244,7 +242,7 @@ export default function SGSP_Completo(){
     {anilha:'0140369/20',assoc:'11',colec:'33',num:'283',sexo:'M'},
     {anilha:'1134642/21',assoc:'11',colec:'33',num:'283',sexo:'M'},
   ]);
-  const [listPombosWin,setListPombosWin]=useState({dePombo:'0000023/22',atePombo:'9641564/24',deAssoc:'11',deColec:'33',deNum:'77',deNome:'RENATO SOARES',ateAssoc:'11',ateColec:'33',ateNum:'1517',ateNome:'VENERANDO SOARES DA SILVA',deData:'',ateData:'31/12/2025',tipo:'Por pombo'});
+  const [listPombosWin,setListPombosWin]=useState({dePombo:'',atePombo:'',deAssoc:'',deColec:'',deNum:'',deNome:'',ateAssoc:'',ateColec:'',ateNum:'',ateNome:'',deData:'',ateData:'',tipo:'Por pombo'});
 
   // ===== VINCENTY FRONTEND (mesmo motor do server.js - 0.5mm) =====
   const vincenty = (lat1,lon1,lat2,lon2) => {
@@ -335,6 +333,26 @@ export default function SGSP_Completo(){
     setPombosEnv({...pombosEnv,ano:c.ano,num:c.num});
     setMsg('Concurso '+c.ano+'/'+c.num+' '+c.nome+' ATIVO — Lat '+c.latG+'° Lon '+c.lonG+'° — Hora '+c.horaSolta+' — Matriz recalculada para '+concorrentesLista.length+' concorrentes');
   };
+  // ===== BOTÕES NOVO/DESFAZER/ANULAR UNIVERSAIS =====
+  const novoConcurso = () => { setConcursoEdit({ano:'',num:'',nome:'',data:'',numConc:'',premios:'Não',tipo:'Velocidade',oficial:'Sim',pontosPombos:'Sim',pontosConc:'Sim',noite1:'00:00:00',noite2:'00:00:00',noite3:'00:00:00',horaSolta:'',obs:'',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''}); setMsg('Novo concurso - preencha os campos ou use a lupa'); };
+  const desfazerConcurso = () => { setConcursoEdit({ano:'',num:'',nome:'',data:'',numConc:'',premios:'Não',tipo:'Velocidade',oficial:'Sim',pontosPombos:'Sim',pontosConc:'Sim',noite1:'00:00:00',noite2:'00:00:00',noite3:'00:00:00',horaSolta:'',obs:'',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''}); setMsg('Alterações desfeitas'); };
+  const anularConcurso = () => { if(!concursoEdit.ano || !concursoEdit.num) return setMsg('Nenhum concurso para anular'); if(confirm('Anular concurso '+concursoEdit.ano+'/'+concursoEdit.num+' '+concursoEdit.nome+'?')){ setConcursosLista(prev=>prev.filter(c=>!(c.ano===concursoEdit.ano && c.num===concursoEdit.num))); setConcursoEdit({ano:'',num:'',nome:'',data:'',numConc:'',premios:'Não',tipo:'Velocidade',oficial:'Sim',pontosPombos:'Sim',pontosConc:'Sim',noite1:'00:00:00',noite2:'00:00:00',noite3:'00:00:00',horaSolta:'',obs:'',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''}); setMsg('Concurso anulado'); } };
+  const novoAssoc = () => { setAssocEdit({codigo:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',cod3:'',telefone:'',fax:'',email:''}); setMsg('Nova associação'); };
+  const desfazerAssoc = () => { setAssocEdit({codigo:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',cod3:'',telefone:'',fax:'',email:''}); setMsg('Desfeito'); };
+  const anularAssoc = () => { if(!assocEdit.codigo) return setMsg('Nenhuma associação para anular'); if(confirm('Anular associação '+assocEdit.codigo+'?')){ setAssocLista(prev=>prev.filter(a=>a.codigo!==assocEdit.codigo)); setAssocEdit({codigo:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',cod3:'',telefone:'',fax:'',email:''}); setMsg('Associação anulada'); } };
+  const novoColec = () => { setColecEdit({assoc:'',assocNome:'',colec:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',cod3:'',telefone:'',fax:'',email:'',numFed:''}); setMsg('Nova colectividade'); };
+  const desfazerColec = () => { setColecEdit({assoc:'',assocNome:'',colec:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',cod3:'',telefone:'',fax:'',email:'',numFed:''}); setMsg('Desfeito'); };
+  const anularColec = () => { if(!colecEdit.colec) return setMsg('Nenhuma colectividade para anular'); if(confirm('Anular colectividade '+colecEdit.colec+'?')){ setColecLista(prev=>prev.filter(c=>c.colec!==colecEdit.colec)); setColecEdit({assoc:'',assocNome:'',colec:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',cod3:'',telefone:'',fax:'',email:'',numFed:''}); setMsg('Colectividade anulada'); } };
+  const novoConcorrente = () => { setConcEdit({assoc:'',col:'',num:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',fax:'',email:'',licFed:'',doublagem:'Não',grupoFundo:'Não',pagaList:'Não',tipo:'Concorrente',sorteio:'Não',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''}); setMsg('Novo concorrente'); };
+  const desfazerConcorrente = () => { setConcEdit({assoc:'',col:'',num:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',fax:'',email:'',licFed:'',doublagem:'Não',grupoFundo:'Não',pagaList:'Não',tipo:'Concorrente',sorteio:'Não',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''}); setMsg('Desfeito'); };
+  const anularConcorrente = () => { if(!concEdit.num) return setMsg('Nenhum concorrente para anular'); if(confirm('Anular concorrente '+concEdit.num+' '+concEdit.nome+'?')){ setConcorrentesLista(prev=>prev.filter(c=>c.num!==concEdit.num)); setConcEdit({assoc:'',col:'',num:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',fax:'',email:'',licFed:'',doublagem:'Não',grupoFundo:'Não',pagaList:'Não',tipo:'Concorrente',sorteio:'Não',latG:'',latM:'',latS:'',lonG:'',lonM:'',lonS:''}); setMsg('Concorrente anulado'); } };
+  const novoPomboFull = () => { setPomboEdit({anilha:'',assoc:'',colec:'',num:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',sexo:'Macho',pomboFe:'Não',equipaFixa:'Não',dataIntro:''}); setMsg('Novo pombo'); };
+  const desfazerPombo = () => { setPomboEdit({anilha:'',assoc:'',colec:'',num:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',sexo:'Macho',pomboFe:'Não',equipaFixa:'Não',dataIntro:''}); setMsg('Desfeito'); };
+  const anularPombo = () => { if(!pomboEdit.anilha) return setMsg('Nenhum pombo para anular'); if(confirm('Anular pombo '+pomboEdit.anilha+'?')){ setPombosLista(prev=>prev.filter(p=>p.anilha!==pomboEdit.anilha)); setPomboEdit({anilha:'',assoc:'',colec:'',num:'',nome:'',morada:'',localidade:'',cod1:'',cod2:'',telefone:'',sexo:'Macho',pomboFe:'Não',equipaFixa:'Não',dataIntro:''}); setMsg('Pombo anulado'); } };
+  const salvarAssoc = () => { const n={codigo:assocEdit.codigo,nome:assocEdit.nome,morada:assocEdit.morada,localidade:assocEdit.localidade,cod1:assocEdit.cod1,cod2:assocEdit.cod2,cod3:assocEdit.cod3,telefone:assocEdit.telefone,email:assocEdit.email}; setAssocLista(prev=>{ const idx=prev.findIndex(a=>a.codigo===n.codigo); if(idx>=0){ const nn=[...prev]; nn[idx]=n; return nn; } return [...prev,n]; }); setMsg('Associação '+n.codigo+' guardada'); };
+  const salvarColec = () => { const n={assoc:colecEdit.assoc,assocNome:colecEdit.assocNome,colec:colecEdit.colec,nome:colecEdit.nome,morada:colecEdit.morada,localidade:colecEdit.localidade,cod1:colecEdit.cod1,cod2:colecEdit.cod2,cod3:colecEdit.cod3,telefone:colecEdit.telefone,fax:colecEdit.fax,email:colecEdit.email,numFed:colecEdit.numFed}; setColecLista(prev=>{ const idx=prev.findIndex(c=>c.colec===n.colec && c.assoc===n.assoc); if(idx>=0){ const nn=[...prev]; nn[idx]=n; return nn; } return [...prev,n]; }); setMsg('Colectividade '+n.assoc+'/'+n.colec+' guardada'); };
+
+
 
 
   // Calculo automático quando muda anilha/hora/concurso
@@ -1575,10 +1593,10 @@ Data;Concurso;Tipo;Clas;Coef
                     </div>
                   </div>
                   <div style={{display:'flex',justifyContent:'center',gap:'6px'}}>
-                    <button style={s.btn} onClick={()=>setMsg('Novo concurso criado')}>Novo</button>
+                    <button style={s.btn} onClick={novoConcurso}>Novo</button>
                     <button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={salvarConcurso}>Guardar</button>
-                    <button style={s.btn}>Desfazer</button>
-                    <button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button>
+                    <button style={s.btn} onClick={desfazerConcurso}>Desfazer</button>
+                    <button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={anularConcurso}>Anular</button>
                     <button style={s.btn} onClick={()=>open('listagemConcursosPreview')}>Imprimir</button>
                     <button style={s.btn} onClick={()=>close('tabelaConcursos')}>Sair</button>
                   </div>
@@ -1778,8 +1796,8 @@ Data;Concurso;Tipo;Clas;Coef
               <div style={{display:'flex',justifyContent:'center',gap:'6px'}}>
                 <button style={s.btn} onClick={()=>{ const t=(parseInt(pombosEnv.encestados||0)+parseInt(pombosEnv.doublagem||0)); setPombosEnv({...pombosEnv,total:String(t)}); setMsg('Pombos Enviados atualizado: '+t); }}>Novo</button>
                 <button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>{ const t=(parseInt(pombosEnv.encestados||0)+parseInt(pombosEnv.doublagem||0)); setPombosEnv({...pombosEnv,total:String(t)}); setMsg('Pombos Enviados guardado: Concurso '+pombosEnv.ano+'/'+pombosEnv.num+' Total '+t); close('pombosEnviadosWin'); }}>Guardar</button>
-                <button style={s.btn}>Desfazer</button>
-                <button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={()=>setPombosEnv({ano:'2025',num:'1',assoc:'11',colec:'33',assocNome:'Federacao Paulista de Columbiofilia',encestados:'',doublagem:'',total:'0'})}>Anular</button>
+                <button style={s.btn} onClick={()=>setMsg('Desfeito')}>Desfazer</button>
+                <button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={()=>{ if(confirm('Anular pombos enviados?')){ setPombosEnv({ano:'',num:'',assoc:'',colec:'',assocNome:'',encestados:'',doublagem:'',total:'0'}); setMsg('Anulado'); }}}>Anular</button>
                 <button style={s.btn} onClick={()=>close('pombosEnviadosWin')}>Sair</button>
               </div>
             </div>
@@ -1929,7 +1947,7 @@ Data;Concurso;Tipo;Clas;Coef
                     </div>
                   </div>
                   <div style={{display:'flex',justifyContent:'center',gap:'6px'}}>
-                    <button style={s.btn}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>{setMsg('Local '+localEdit.codigo+' guardado'); setLocaisTab('Consultar');}}>Guardar</button><button style={s.btn}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button><button style={s.btn} onClick={()=>open('listagemDistanciasWin')}>Imprimir</button><button style={s.btn} onClick={()=>close('locaisSoltaWin')}>Sair</button>
+                    <button style={s.btn} onClick={()=>{setLocalEdit({codigo:'',nome:'',imprime:'S'}); setMsg('Novo local')}}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>{setMsg('Local '+localEdit.codigo+' guardado'); setLocaisTab('Consultar');}}>Guardar</button><button style={s.btn} onClick={()=>setMsg('Desfeito')}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={()=>{ if(confirm('Anular local?')) setMsg('Local anulado')}}>Anular</button><button style={s.btn} onClick={()=>open('listagemDistanciasWin')}>Imprimir</button><button style={s.btn} onClick={()=>close('locaisSoltaWin')}>Sair</button>
                   </div>
                 </div>
               )}
@@ -1963,7 +1981,7 @@ Data;Concurso;Tipo;Clas;Coef
                 <label>Hora fim :</label><input value={horaMorta.horaFim} onChange={e=>setHoraMorta({...horaMorta,horaFim:e.target.value})} placeholder="  :  " style={{...s.field,width:'70px',textAlign:'center'}} />
               </div>
               <div style={{display:'flex',justifyContent:'center',gap:'6px',marginTop:'12px'}}>
-                <button style={s.btn}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>setMsg('Hora Morta guardada '+horaMorta.data)}>Guardar</button><button style={s.btn}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button><button style={s.btn}>Imprimir</button><button style={s.btn} onClick={()=>close('horasMortasWin')}>Sair</button>
+                <button style={s.btn} onClick={()=>setHoraMorta({data:'',tempoMorto:'',horaInicio:'',horaFim:''})}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>setMsg('Hora Morta guardada '+horaMorta.data)}>Guardar</button><button style={s.btn} onClick={()=>setMsg('Desfeito')}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={()=>{ if(confirm('Anular?')) setMsg('Anulado')}}>Anular</button><button style={s.btn}>Imprimir</button><button style={s.btn} onClick={()=>close('horasMortasWin')}>Sair</button>
               </div>
             </div>
           </div>
@@ -1988,8 +2006,8 @@ Data;Concurso;Tipo;Clas;Coef
               </div>
               <div style={{display:'flex',justifyContent:'center',gap:'8px',marginTop:'12px'}}>
                 <button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>{setMsg('Pontos '+pontosPerc.tipo+' guardado: '+pontosPerc.pontos1+' pts'); close('pontosPercWin');}}>Guardar</button>
-                <button style={s.btn}>Desfazer</button>
-                <button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button>
+                <button style={s.btn} onClick={()=>setMsg('Desfeito')}>Desfazer</button>
+                <button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={()=>{ if(confirm('Anular?')) setMsg('Anulado')}}>Anular</button>
                 <button style={s.btn} onClick={()=>close('pontosPercWin')}>Sair</button>
               </div>
             </div>
@@ -2172,7 +2190,7 @@ Data;Concurso;Tipo;Clas;Coef
                   <div style={{display:'flex',gap:'6px',alignItems:'center',marginBottom:'4px'}}><label style={{width:'100px'}}>Telefone :</label><input value={assocEdit.telefone} onChange={e=>setAssocEdit({...assocEdit,telefone:e.target.value})} style={{...s.field,flex:1}} /><label style={{marginLeft:'8px'}}>Fax :</label><input value={assocEdit.fax} onChange={e=>setAssocEdit({...assocEdit,fax:e.target.value})} style={{...s.field,flex:1}} /></div>
                   <div style={{display:'flex',gap:'6px',alignItems:'center',marginBottom:'8px'}}><label style={{width:'100px'}}>Email :</label><input value={assocEdit.email} onChange={e=>setAssocEdit({...assocEdit,email:e.target.value})} style={{...s.field,flex:1}} /></div>
                   <div style={{display:'flex',justifyContent:'center',gap:'6px'}}>
-                    <button style={s.btn}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>{setMsg('Associação '+assocEdit.codigo+' guardada');}}>Guardar</button><button style={s.btn}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button><button style={s.btn}>Imprimir</button><button style={s.btn} onClick={()=>close('tabelaAssociacoes')}>Sair</button>
+                    <button style={s.btn} onClick={novoAssoc}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={salvarAssoc}>Guardar</button><button style={s.btn} onClick={desfazerAssoc}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={anularAssoc}>Anular</button><button style={s.btn}>Imprimir</button><button style={s.btn} onClick={()=>close('tabelaAssociacoes')}>Sair</button>
                   </div>
                 </div>
               )}
@@ -2216,7 +2234,7 @@ Data;Concurso;Tipo;Clas;Coef
                   <div style={{display:'flex',gap:'6px',alignItems:'center',marginBottom:'4px'}}><label style={{width:'100px'}}>Email :</label><input value={colecEdit.email} onChange={e=>setColecEdit({...colecEdit,email:e.target.value})} style={{...s.field,flex:1}} /></div>
                   <div style={{display:'flex',gap:'6px',alignItems:'center',marginBottom:'8px'}}><label style={{width:'100px'}}>Número da Federação :</label><input value={colecEdit.numFed} onChange={e=>setColecEdit({...colecEdit,numFed:e.target.value})} style={{...s.field,width:'50px',textAlign:'center'}} /></div>
                   <div style={{display:'flex',justifyContent:'center',gap:'6px'}}>
-                    <button style={s.btn}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={()=>setMsg('Colectividade guardada')}>Guardar</button><button style={s.btn}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button><button style={s.btn}>Detalhe</button><button style={s.btn}>Simples</button><button style={s.btn} onClick={()=>close('tabelaColectividades')}>Sair</button>
+                    <button style={s.btn} onClick={novoColec}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={salvarColec}>Guardar</button><button style={s.btn} onClick={desfazerColec}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={anularColec}>Anular</button><button style={s.btn}>Detalhe</button><button style={s.btn}>Simples</button><button style={s.btn} onClick={()=>close('tabelaColectividades')}>Sair</button>
                   </div>
                 </div>
               )}
@@ -2280,7 +2298,7 @@ Data;Concurso;Tipo;Clas;Coef
                     </div>
                   </div>
                   <div style={{display:'flex',justifyContent:'center',gap:'6px'}}>
-                    <button style={s.btn}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={salvarConcorrente}>Guardar</button><button style={s.btn}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}}>Anular</button><button style={s.btn} onClick={()=>close('tabelaConcorrentes')}>Sair</button>
+                    <button style={s.btn} onClick={novoConcorrente}>Novo</button><button style={{...s.btn,backgroundColor:'#c0ffc0'}} onClick={salvarConcorrente}>Guardar</button><button style={s.btn} onClick={desfazerConcorrente}>Desfazer</button><button style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={anularConcorrente}>Anular</button><button style={s.btn} onClick={()=>close('tabelaConcorrentes')}>Sair</button>
                   </div>
                 </div>
               )}
@@ -2444,10 +2462,10 @@ Data;Concurso;Tipo;Clas;Coef
                     </div>
                   </div>
                   <div style={{display:'flex',justifyContent:'center',gap:'4px',borderTop:'2px groove #fff',paddingTop:'6px'}}>
-                    <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',padding:'3px 6px'}} onClick={()=>setPomboEdit({anilha:'',assoc:'0',colec:'',num:'0',nome:'',morada:'',localidade:'',cod1:'0',cod2:'',telefone:'',sexo:'Macho',pomboFe:'Não',equipaFixa:'Não',dataIntro:'//'})}><span>📄</span>Novo</button>
+                    <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',padding:'3px 6px'}} onClick={novoPomboFull}><span>📄</span>Novo</button>
                     <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',backgroundColor:'#c0ffc0',padding:'3px 6px'}} onClick={salvarPombo}><span>💾</span>Guardar</button>
-                    <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',padding:'3px 6px'}}><span>↩️</span>Desfazer</button>
-                    <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',backgroundColor:'#ffc0c0',padding:'3px 6px'}}><span>❌</span>Anular</button>
+                    <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',padding:'3px 6px'}} onClick={desfazerPombo}><span>↩️</span>Desfazer</button>
+                    <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',backgroundColor:'#ffc0c0',padding:'3px 6px'}} onClick={anularPombo}><span>❌</span>Anular</button>
                     <button style={{...s.btn,display:'flex',flexDirection:'column',alignItems:'center',minWidth:'60px',padding:'3px 6px'}} onClick={()=>close('manutencaoPombosWin')}><span>🚪</span>Sair</button>
                   </div>
                 </div>
