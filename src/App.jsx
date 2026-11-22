@@ -40,7 +40,7 @@ function gms(lat,lon){
 
 export default function SGSP_Completo(){
   const [menu,setMenu]=useState(null);
-  const [wins,setWins]=useState(['lancamento','calculo']);
+  const [wins,setWins]=useState([]);
   const [focused,setFocused]=useState('lancamento');
   const open=(id)=>{ setWins(w=> w.includes(id) ? w : [...w,id]); setFocused(id); setMenu(null); };
   const close=(id)=>{ setWins(w=>w.filter(x=>x!==id)); };
@@ -2593,7 +2593,18 @@ Data;Concurso;Tipo;Clas;Coef
 
       </div>
 
-      <div style={s.status}><span>{msg}</span><span>User (GpblUser) | Record 1/1 | Record Unlocked | NUM 07:52 09/02/2026</span></div>
+      {wins.length>0 && (
+        <div style={{backgroundColor:'#c0c0c0',borderTop:'2px groove #fff',padding:'2px 4px',display:'flex',gap:'4px',flexWrap:'wrap',alignItems:'center',minHeight:'26px'}}>
+          <span style={{fontSize:'10px',fontWeight:'bold',color:'#000080',marginRight:'6px'}}>Bandeja:</span>
+          {wins.map(w=>(
+            <button key={w} onClick={()=>close(w)} title={'Minimizar '+w} style={{padding:'2px 6px',border:'2px outset #fff',backgroundColor:'#d4d0c8',fontSize:'10px',cursor:'pointer',display:'flex',alignItems:'center',gap:'4px'}}>
+              <span style={{width:'8px',height:'8px',backgroundColor:'#000080',display:'inline-block'}}></span>{w} ✕
+            </button>
+          ))}
+          <button onClick={()=>setWins([])} style={{marginLeft:'auto',padding:'2px 6px',border:'2px outset #fff',backgroundColor:'#d4d0c8',fontSize:'10px'}}>Limpar bandeja</button>
+        </div>
+      )}
+      <div style={s.status}><span>{msg}</span><span>User (GpblUser) | {wins.length} janela(s) | S.G.S.P</span></div>
     </div>
   );
 }
