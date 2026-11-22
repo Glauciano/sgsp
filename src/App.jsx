@@ -774,15 +774,16 @@ export default function SGSP_Completo(){
               <div style={{display:'flex',gap:'6px'}}>
                 <div style={{flex:1,backgroundColor:'#fff',border:'2px inset #fff',height:'90px',overflowY:'auto',padding:'4px'}}>
                   <div style={{fontWeight:'bold',fontSize:'10px',backgroundColor:'#000080',color:'#fff',padding:'2px 4px',display:'flex',justifyContent:'space-between'}}><span>Pombos introduzidos</span><span>Anilha | HoraCheg</span></div>
-                  {anilhasLancadas.map((a,i)=>(<div key={i} style={{display:'flex',justifyContent:'space-between',fontSize:'11px',padding:'1px 4px',borderBottom:'1px solid #eee'}}><span>{a.anilha}</span><span>{a.hora}</span></div>))}
+                  {anilhasLancadas.length===0 && <div style={{fontSize:'10px',color:'#808080',textAlign:'center',padding:'6px'}}>Nenhum pombo lançado — digite Anilha e clique Novo</div>}
+                  {anilhasLancadas.map((a,i)=>(<div key={i} style={{display:'flex',justifyContent:'space-between',fontSize:'11px',padding:'1px 4px',borderBottom:'1px solid #eee',backgroundColor:i%2?'#f0f0f0':'#fff'}}><span>{a.anilha}</span><span style={{display:'flex',gap:'6px',alignItems:'center'}}>{a.hora} <button type="button" title="Excluir pombo" onClick={()=>{ setAnilhasLancadas(anilhasLancadas.filter((_,idx)=>idx!==i)); setMsg('Pombo '+a.anilha+' excluído'); }} style={{...s.tbtn,padding:'0 3px',fontSize:'10px',color:'#c00',border:'1px solid #c00'}}>✕</button></span></div>))}
                 </div>
               </div>
 
               <div style={{display:'flex',justifyContent:'center',gap:'6px',marginTop:'8px',flexWrap:'wrap'}}>
-                <button type="button" style={s.btn} onClick={()=>{ if(!form.anilha) return setMsg('Informe Anilha'); setAnilhasLancadas([...anilhasLancadas,{anilha:form.anilha,hora:form.diaCheg||'12:00:00'}]); setForm({...form,anilha:''}); setMsg('Pombo lançado — ENTER próximo campo'); }}>📄 Novo</button>
-                <button type="button" style={s.btn} onClick={()=>setMsg('Guardado — Movimentos → Cálculo de Prova para apurar')}>💾 Guardar</button>
-                <button type="button" style={s.btn}>↩️ Desfazer</button>
-                <button type="button" style={s.btn} onClick={apagarCalculo}>❌ Anular</button>
+                <button type="button" style={s.btn} onClick={()=>{ if(!form.anilha) return setMsg('Informe Anilha'); setAnilhasLancadas([...anilhasLancadas,{anilha:form.anilha,hora:form.diaCheg||'12:00:00'}]); setForm({...form,anilha:''}); setMsg('Pombo lançado — '+anilhasLancadas.length+1+' pombos'); }}>📄 Novo</button>
+                <button type="button" style={s.btn} onClick={()=>setMsg('Guardado — '+anilhasLancadas.length+' pombos — Movimentos → Cálculo de Prova para apurar')}>💾 Guardar</button>
+                <button type="button" style={s.btn} onClick={()=>{ if(form.anilha || form.concorrente){ setForm({...form,anilha:'',concorrente:'',distancia:'',media:''}); setMsg('Formulário desfeito'); }}}>↩️ Desfazer</button>
+                <button type="button" style={{...s.btn,backgroundColor:'#ffc0c0'}} onClick={()=>{ if(anilhasLancadas.length===0) return setMsg('Nenhum pombo para anular'); if(confirm('Anular último pombo '+anilhasLancadas[anilhasLancadas.length-1].anilha+'?')){ setAnilhasLancadas(anilhasLancadas.slice(0,-1)); setMsg('Último pombo anulado'); } }}>❌ Anular</button>
                 <button type="button" style={{...s.btn,backgroundColor:'#ffffc0'}} onClick={()=>close('lancamento')}>📁 Sair</button>
               </div>
               </form>
